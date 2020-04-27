@@ -1,10 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Container, Nome, Cargo, CenterView, EditItem, EditText } from './styles';
 
 export default function Jobs() {
     return (
-        <View>
-            <Text>Test</Text>
-        </View>
+        <Container>
+            <Nome></Nome>
+            <Cargo></Cargo>
+            <CenterView>
+                <EditItem>
+                    <EditText>
+                        Editar
+                    </EditText>
+                </EditItem>
+                <EditItem>
+                    <EditText>
+                        Excluir
+                    </EditText>
+                </EditItem>
+            </CenterView>
+        </Container>
     );
 }
