@@ -1,19 +1,19 @@
 import React from 'react';
 import { Container, Nome, Cargo, CenterView, EditItem, EditText } from './styles';
 
-export default function Jobs() {
+export default function Jobs({ data, editar }) {
     return (
         <Container>
-            <Nome></Nome>
-            <Cargo></Cargo>
+            <Nome>{data.nome}</Nome>
+            <Cargo>{data.cargo}</Cargo>
             <CenterView>
-                <EditItem>
+                <EditItem onPress={() => editar(data)}>
                     <EditText>
                         Editar
                     </EditText>
                 </EditItem>
                 <EditItem>
-                    <EditText>
+                    <EditText onPress={() => { }}>
                         Excluir
                     </EditText>
                 </EditItem>

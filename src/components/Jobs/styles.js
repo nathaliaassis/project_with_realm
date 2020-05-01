@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.View`
-    padding: 20;
+    padding: 20px;
     border-radius: 5px;
     background: #fff;
     margin-bottom: 15px;
@@ -22,8 +22,8 @@ export const CenterView = styled.View`
     margin-top: 15px;
 `;
 export const EditItem = styled.TouchableOpacity`
-    background-color: #ff6666;
-    padding: 8px 20px;
+    background-color: #f4004d;
+    padding: 8px;
     border-radius: 5px;
 `;
 export const EditText = styled.Text`

@@ -4,7 +4,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #1c8fff;
+  background-color: #f4004d;
   padding: 32px 15px;
   padding-top: ${32 + getStatusBarHeight(true)};
 `;
