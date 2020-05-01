@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nome, Cargo, CenterView, EditItem, EditText } from './styles';
 
-export default function Jobs({ data, editar }) {
+export default function Jobs({ data, editar, excluir }) {
     return (
         <Container>
             <Nome>{data.nome}</Nome>
@@ -13,7 +13,7 @@ export default function Jobs({ data, editar }) {
                     </EditText>
                 </EditItem>
                 <EditItem>
-                    <EditText onPress={() => { }}>
+                    <EditText onPress={() => excluir(data)}>
                         Excluir
                     </EditText>
                 </EditItem>

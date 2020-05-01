@@ -22,7 +22,7 @@ export const CenterView = styled.View`
     margin-top: 15px;
 `;
 export const EditItem = styled.TouchableOpacity`
-    background-color: #f4004d;
+    background-color: #0081f9;
     padding: 8px;
     border-radius: 5px;
 `;

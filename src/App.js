@@ -85,6 +85,21 @@ export default function App() {
     setEditId(null);
     Keyboard.dismiss();
   }
+  async function excluirJob(data) {
+    const realm = await getRealm();
+    //deleta jobs
+    const id = data.id;
+    realm.write(() => {
+      if (realm.objects('Job').filtered('id=' + id).length > 0) {
+        realm.delete(
+          realm.objects('Job').filtered('id=' + id)
+        )
+      }
+    });
+    //atualiza lista de jobs cadastrados
+    const jobsAtualizados = realm.objects('Job');
+    setJobs(jobsAtualizados);
+  }
   return (
     <Container>
       <StatusBar backgroundColor='transparent' translucent={true} barStyle='light-content' />
@@ -110,7 +125,11 @@ export default function App() {
         data={jobs}
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
-          <Jobs data={item} editar={(data) => editarJob(data)} />
+          <Jobs
+            data={item}
+            editar={(data) => editarJob(data)}
+            excluir={(data) => excluirJob(data)}
+          />
         )}
       />
     </Container>
