@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.View`
-    padding: 20px;
+    padding: 16px;
     border-radius: 5px;
     background: #fff;
     margin-bottom: 15px;
+    flex-direction: row;
+    justify-content: space-between;
 `;
 export const Nome = styled.Text`
     font-size: 20px;
@@ -14,17 +16,15 @@ export const Nome = styled.Text`
 export const Cargo = styled.Text`
     font-size: 18px;
     font-weight: 300;
-    color: #a1a1A1;`
-    ;
+    color: #a1a1A1;
+`;
 export const CenterView = styled.View`
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: 15px;
 `;
 export const EditItem = styled.TouchableOpacity`
-    background-color: #0081f9;
+    /* background-color: #0081f9;
     padding: 8px;
-    border-radius: 5px;
+    border-radius: 5px; */
 `;
 export const EditText = styled.Text`
     color: #fff;

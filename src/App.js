@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, Keyboard } from 'react-native';
-import { Container, Title, Input, Project, CenterView, Btn, BtnText, List } from './styles';
+import { Container, Title, Input, Project, CenterView, Btn, BtnText, List, BtnCancelar } from './styles';
 import Jobs from './components/Jobs';
 
 import getRealm from './Services/realm';
@@ -11,6 +11,7 @@ export default function App() {
   const [cargo, setCargo] = useState('');
   const [jobs, setJobs] = useState([]);
   const [editId, setEditId] = useState(null);
+  const [showBtn, setShowBtn] = useState(true);
 
   useEffect(() => {
     const loadJobs = async () => {
@@ -20,11 +21,13 @@ export default function App() {
     }
     loadJobs();
   }, [])
-
   async function saveJob(data) {
     const realm = await getRealm();
 
-    const id = realm.objects('Job').length + 1;
+    // const id = realm.objects('Job').length + 1;
+    const id = realm.objects('Job')
+      .sorted('id', true).length > 0 ?
+      realm.objects('Job').sorted('id', true)[0].id + 1 : 1;
 
     const dadosJob = {
       id: id,
@@ -60,6 +63,7 @@ export default function App() {
     setNome(data.nome),
       setCargo(data.cargo),
       setEditId(data.id)
+    setShowBtn(false);
   }
   async function editarDados() {
     const realm = await getRealm();
@@ -83,6 +87,7 @@ export default function App() {
     setNome('');
     setCargo('');
     setEditId(null);
+    setShowBtn(true);
     Keyboard.dismiss();
   }
   async function excluirJob(data) {
@@ -97,8 +102,14 @@ export default function App() {
       }
     });
     //atualiza lista de jobs cadastrados
-    const jobsAtualizados = realm.objects('Job');
+    const jobsAtualizados = realm.objects('Job').sorted('id', false);
     setJobs(jobsAtualizados);
+  }
+  function cancelar() {
+    setEditId(null);
+    setNome('');
+    setCargo('');
+    setShowBtn(true);
   }
   return (
     <Container>
@@ -109,16 +120,25 @@ export default function App() {
       <Title>Cargo</Title>
       <Input autoCapitalize='none' autoCorrect={false} value={cargo} onChangeText={(cargo) => setCargo(cargo)} />
       <CenterView>
-        <Btn onPress={() => addJob()}>
-          <BtnText>
-            Cadastrar
+        {showBtn ? (
+          <Btn onPress={() => addJob()}>
+            <BtnText>
+              Cadastrar
           </BtnText>
-        </Btn>
-        <Btn onPress={() => editarDados()}>
-          <BtnText>
-            Editar
-          </BtnText>
-        </Btn>
+          </Btn>) :
+          <>
+            <BtnCancelar onPress={() => cancelar()}>
+              <BtnText>
+                Cancelar
+            </BtnText>
+            </BtnCancelar>
+            <Btn onPress={() => editarDados()}>
+              <BtnText>
+                Salvar
+            </BtnText>
+            </Btn>
+          </>
+        }
       </CenterView>
       <List
         keyboardShouldPersistTaps='handled'
@@ -132,6 +152,6 @@ export default function App() {
           />
         )}
       />
-    </Container>
+    </Container >
   );
 }

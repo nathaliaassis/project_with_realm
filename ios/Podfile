@@ -79,6 +79,8 @@ target 'project_with_realm' do
 
   pod 'RealmJS', :path => '../node_modules/realm'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'project_with_realmTests' do
     inherit! :complete
     # Pods for testing
